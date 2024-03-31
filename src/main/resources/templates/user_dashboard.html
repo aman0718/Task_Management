@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace= "~{base :: Layout(~{::title}, ~{::section})}">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task Management</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    </head>
+
+    <body>
+        <section>
+            
+            <div class="container mt-5">
+                <h1 class="fw-bold text-center">Welcome to Your Dashboard</h1>
+                <hr>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr class="thead-light">
+                            <th scope="col">Number</th>
+                            <th scope="col">Task Name</th>
+                            <!-- <th scope="col">Description</th> -->
+                            <th scope="col">Created Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- This is where you will iterate through the tasks and display them -->
+                        <tr th:each="task, iterStat  : ${notesList}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${task.title}"></td>
+                            <!-- <td th:text="${task.description}"></td> -->
+                            <td th:text="${task.date}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+        
+
+    </body>
+
+</html>

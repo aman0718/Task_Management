@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: Layout(~{::title}, ~{::section})}">
+
+    <head>
+
+        <title></title>
+
+    </head>
+
+    <body>
+        <section>
+            <div class="container mt-2">
+                <div class="row">
+                    <h2 class="text-center p-2 fw-bold" style="color: #ffffff">Notes</h2>
+                    <div th:each= "notes: ${notesList}" class="col-md-10 offset-md-1">
+                        <div class="card shadow p-1 mb-3 bg-body-tertiary rounded">
+                            
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+
+                                <p class="fw-bold">[[${notes.title}]]</pc>
+                                <p>[[${notes.description}]]</p>
+                                <p>Date: [[${notes.date}]]</p>
+
+                                <div class="text-center">
+                                    <a th:href="@{'editNotes/'+${notes.id}}" class="btn btn-dark btn-sm">Edit</a>
+                                    <a th:href="@{'deleteNotes/'+${notes.id}}" class="btn btn-dark btn-sm">Delete</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!------------------------------- PAGINATION ---------------------------->
+                <div class="row mt-3">       
+                    <div class="col-md-4 offset-md-1 text-right p-3">
+                        <p class="fw-bold">Total Notes: [[${totalElements}]]</p>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+
+                                <li th:if= "${currentPage!=0}"
+                                class="page-item"><a class="page-link" th:href= "@{'/user/viewNotes?pageNo='+${currentPage-1}}">Previous</a></li>
+
+                                <li class="page-item" 
+                                    th:each= "i:${#numbers.sequence(1,totalPages)}" 
+                                    th:classappend="${currentPage==i-1 ? 'active':''}">
+                                    <a th:href= "@{'/user/viewNotes?pageNo='+${i-1}}" 
+                                        class="page-link">[[${i}]]
+                                    </a>
+                                </li>
+
+                                <li th:if= "${currentPage+1!=totalPages}"
+                                    class="page-item"><a class="page-link"
+                                    th:href= "@{'/user/viewNotes?pageNo='+${currentPage+1}}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                 <!------------------------------- PAGINATION ---------------------------->
+
+
+            </div>
+                            
+        </section>
+
+    </body>
+
+</html>
